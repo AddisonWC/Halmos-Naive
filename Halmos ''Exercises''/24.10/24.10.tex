@@ -1,0 +1,538 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage[mathscr]{euscript}
+
+\DeclarePairedDelimiter\prn{(}{)}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\brc{[}{]}
+\DeclarePairedDelimiter\crl{\{}{\}}
+\newcommand{\nl}[0]{\newline}
+\newcommand{\rimp}[1][5]{\kern#1px \Longrightarrow \kern#1px}
+\newcommand{\limp}[1][5]{\kern#1px \Longleftarrow \kern#1px}
+\newcommand{\cimp}[1][5]{\kern#1px \iff \kern#1px}
+
+\begin{document}
+\begin{flushleft}
+
+\centerline{\textbf{Section 3}} 
+\fbox{Nullset stacking}\nl
+If any two sets produced by pairing were the same, they would have the forms $\{a,b\}$ and $\{a,b\}$ or the forms $\{a\}$ and $\{a\}$. In either case, the sets are uniquely identified by the sets that compose them-- we must have paired the same $a$ and $b$ to produce the set $\{a,b\}$, and we must have paired the same $a$ with itself to get the set \{a\}. Any set composed in this way from some base set of elements (in our case, we only have the null set) can be traced back to its exact process of construction, and thus the construction process is unique. \nl
+
+\centerline{\textbf{Section 4}}
+\fbox{$A \cup \emptyset = A$} \nl
+Any element in $A$ is in $A \cup \emptyset$, thus $A \subset A \cup \emptyset$. Also, any element in $A \cup \emptyset$ is also in $A$, because the null set introduces no elements outside of A to the union. Thus, $A \cup \emptyset \subset A$, and $A \cup \emptyset = A$. \nl
+
+\fbox{Commutativity of Unions} \nl
+The definition of a union of two sets is $A \cup B = \bigcup\crl{X: X \in \crl{A, B}}$. This simplifies to:\nl
+$$A \cup B = \bigcup\crl{A,B}$$
+Since $\crl{A,B} = \crl{B,A}$,
+$$A \cup B = \bigcup\crl{A, B} = \bigcup\crl{B,A} = B \cup A$$
+$$A \cup B = B \cup A$$
+
+\fbox{Associativity of Unions} \nl
+Re-term set algebra into statements in boolean logic; $Y(x)$ means $x \in Y$, so $x \in A \cup (B \cup C)$ becomes
+$$A(x) \vee (B(x) \vee C(x))$$
+This statement is necessary and sufficient for our $x \in A \cup (B \cup C)$, and also:
+$$A(x) \vee (B(x) \vee C(x))$$
+$$\Leftrightarrow (A(x) \vee B(x)) \vee C(x) \phantom{2cm}$$
+$$\Leftrightarrow x \in (A \cup B) \cup C \phantom{2cm}$$
+$$x \in A \cup (B \cup C) \cimp x \in (A \cup B) \cup C$$
+So the sets are equivalent.\nl
+
+
+\fbox{Idempotence of Unions} \nl
+Again, re-term set algebra into boolean logic:
+$$x \in A \cup A$$
+$$\Leftrightarrow A(x) \wedge A(x)$$
+$$\Leftrightarrow A(x)$$
+$$\Leftrightarrow x \in A$$
+The statements are logically equivalent, so the sets formed by them are the same set. \nl
+
+\fbox{$A \subset B \Longleftrightarrow A \cup B = B$} \nl
+If $A \subset B$, $A$ introduces no elements outisde $B$ to the union $A \cup B$, so $A \cup B = B$. \nl
+If $A \not\subset B$, then there is some element $x \in A$ where $x \not\in B$, and since $x \in \prn*{A \cup B}$, $A \cup B \neq B$. Now:
+$$\begin{aligned}
+A \not\subset B &\implies A \cup B \neq B \\ 
+\neg\prn*{A \cup B \neq B}  &\implies \neg\prn*{A \not\subset B} \\
+A \cup B = B &\implies A \subset B \\
+\end{aligned}$$
+
+\fbox{$A \cap \emptyset = \emptyset$} \nl
+Again, use boolean logic:
+$$x \in A \cap \emptyset$$
+$$\Leftrightarrow A(x) \wedge \emptyset(x)$$
+$$\Leftrightarrow A(x) \wedge False$$
+$$\Leftrightarrow False$$
+$(A \cap \emptyset)(x)$ is false for any element, so it has no elements and is equivalent to the empty set. \nl
+
+\fbox{Commutativity of Intersections} \nl
+$$x \in A \cap B$$
+$$\Leftrightarrow A(x) \wedge B(x)$$
+$$\Leftrightarrow B(x) \wedge A(x)$$
+$$\Leftrightarrow x \in B \cap A$$
+If either set contains any element, the other also contains it, so they are the same set. \nl
+
+\fbox{Associativity of Intersections} \nl
+$$ x \in A \cap (B \cap C)$$
+$$ \Leftrightarrow A(x) \wedge (B(x) C(x))$$
+$$\Leftrightarrow (A(x) \wedge B(x)) C(x)$$
+$$\Leftrightarrow x \in (A \cap B) \cap C$$
+Again, the statements defining the sets are logically equivalent. \nl
+
+\fbox{Idempotence of Intersections} \nl
+$$ x \in A \cap A$$
+$$\Leftrightarrow A(x) \wedge A(x)$$
+$$\Leftrightarrow A(x)$$
+$$\Leftrightarrow x \in A$$
+
+\fbox{$A \subset B \cimp A \cap B = A$} \nl
+$\implies$ :
+$$A \subset B$$
+$$\Leftrightarrow A(x) \implies B(x)$$
+Now take
+$$x \in A \cap B$$
+$$\Leftrightarrow A(x) \wedge B(x)$$
+$$\Leftrightarrow A(x)$$
+$$\Leftrightarrow x \in A$$
+$$A \cap B = A$$
+$A \subset B \rimp[10] A \cap B = A$. \nl
+$\Longleftarrow$ : \nl
+$$\begin{aligned}
+& \phantom{20px} A \not\subset B \\
+&\Rightarrow\kern10px\exists a \in A \kern10px s.t.\; a \not\in B \\
+&\Rightarrow\kern10px a \not\in B \implies a\not\in A \cap B \\
+&\Rightarrow\kern10px A \cap B \neq A \\
+\end{aligned}$$ \nl
+Now take a contrapositive: \nl
+$$\begin{aligned}
+\neg (A \subset B) &\rimp \neg (A \cap B = A) \\
+A \cap B = A &\rimp A \subset B \\
+\end{aligned}$$
+We now have both desired implications. \nl
+
+\fbox{$\prn*{A \cap B} \cup C = A \cap \prn*{B \cup C} \cimp[10] C \subset A$} \nl
+$\rimp$: \nl
+$$\begin{aligned}
+(A \cap B) \cup C &= A \cap (B \cup C)\\
+C \subset (A \cap B) \cup C &= A \cap (B \cup C)\\
+C &\subset A \cap (B \cup C)\\
+C &\subset A \cap (B \cup C) \subset A  \\
+C &\subset A\\
+\end{aligned}$$
+
+$\limp$: \nl
+$$\begin{aligned}
+&A \cap (B \cup C) \\
+\text{distributive law} : \kern40px &= (A \cap B) \cup (A \cap C) \\
+\text{using } C \subset A :\kern40px &= (A \cap B) \cup C \\
+A \cap (B \cup C) &= (A \cap B) \cup C\\
+\end{aligned}$$
+
+\centerline{\textbf{Section 5}}
+
+\fbox{$(A^c)^c = A$} \nl
+Again, using boolean logic, every line is biconditional with the lines below and above. The use of is what $A \subset E$ makes this possible:
+$$\begin{aligned}
+x \in (A^c)^c \cimp\\
+\neg(\neg A(x) \wedge E(x)) &\wedge E(x)\\
+(A(x) \vee \neg E(x)) &\wedge E(x) \\
+\text{distributive law} : \kern 20px (A(x) \wedge E(x)) &\vee (\neg E(x) \wedge E(x)) \\
+(A(x) \wedge E(x)) &\vee False \\
+A(x) \wedge E(x) \\
+A(x) \cimp \\
+x \in A \\
+\end{aligned}$$
+The step $A(x) \wedge E(x) \cimp[0] A(x)$ is the only one where we need the qualification that $A \subset E$. Otherwise, $(A^c)^c = A \cap E$. \nl
+
+\fbox{$\emptyset^c = E$} \nl
+The null set is a subset of every set, so we get this for free.
+$$\begin{gathered}
+\emptyset^c \\
+\neg \emptyset(x) \wedge E(x)\\
+\neg False \wedge E(x)\\
+True \wedge E(x) \\
+E(x) \\
+E\\
+\end{gathered}$$
+
+\fbox{$E^c = \emptyset $} \nl
+Another free one:
+$$\begin{gathered}
+E^c \\
+\neg E(x) \wedge E(x) \\
+False\\
+\end{gathered}$$
+
+$E^c$ has no members and is the empty set. \nl
+
+\fbox{$A \cap A^c = \emptyset $} \nl
+Don't need $A \subset E$:
+$$\begin{aligned}
+A \cap A^c \\
+A(x) \wedge [\neg A(x) &\wedge E(x)] \\
+[A(x) \wedge \neg A(x)] &\wedge E(x) \\
+False &\wedge E(x) \\
+False\\
+\end{aligned} $$
+$A^c \cap A$ has no members and is the empty set. \nl
+
+\fbox{$A \cup A^c = E$} \nl
+This one requires $A \subset E$:
+$$\begin{aligned}
+A &\cup A^c \\
+A &\vee [\neg A(x) \wedge E(x)]\\
+[A \vee \neg A(x)] &\wedge [A(x) \vee E(x)] \\
+True &\wedge [A(x) \vee E(x)] \\
+A(x) &\vee E(x) \\
+&E(x) \\
+\end{aligned}$$
+If we don't have $A \subset E$, then $A^c \cup A = A \cup E$. \nl
+
+\fbox{$A \subset B \cimp[10] B^c \subset A^c$} \nl
+We don't need $A,B \subset E$ for $\rimp$ :
+$$\begin{aligned}
+A &\subset B \\
+A(x) &\rimp B(x) \\
+\neg E(x) &\rimp \neg E(x) \\
+A(x) \vee \neg E(x) &\rimp B(x) \vee \neg E(x) \\
+\neg[B(x) \vee \neg E(x)] &\rimp \neg[A(x) \vee \neg E(x)] \\
+\neg B(x) \wedge E(x) &\rimp \neg A(x) \wedge E(x) \\
+B^c &\subset A^c \\
+\end{aligned}$$
+But we do need it for $\limp$ :
+$$\begin{aligned}
+B^c &\subset A^c\\
+\neg B(x) &\rimp \neg A(x)\\
+A(x) &\rimp B(x) \\
+A &\subset B \\
+\end{aligned}$$
+
+\fbox{$(A \cup B)^c = A^c \cap B^c$} \nl
+All lines are biconditional, we don't need $A, B \subset E$:
+$$\begin{aligned}
+(A \cup B)^c& \\
+\neg[A(x) \vee B(x)] &\wedge E(x) \\
+[\neg A(x) \wedge \neg B(x)] &\wedge E(x) \\
+[\neg A(x) \wedge \neg B(x)] &\wedge E(x) \wedge E(x)\\
+\text{commute/associate across } \wedge: \kern20px [\neg A(x) \wedge E(x)] &\wedge [\neg B(x) \wedge E(x)] \\
+A^c &\cap B^c \\
+\end{aligned}$$
+
+\fbox{$(A \cap B)^c = A^c \cup B^c$} \nl
+Don't need $A, B \subset E$: 
+$$\begin{aligned}
+(A \cap B)^c \\
+\neg[A(x) \wedge B(x)] &\wedge E(x) \\
+[\neg A(x) \vee \neg B(x)] &\wedge E(x) \\
+[\neg A(x) \wedge E(x)] &\vee [\neg B(x) \wedge E(x)] \\
+A^c &\cup B^c \\
+\end{aligned}$$
+
+\fbox{$A \setminus B = A \cap B^c$} \nl
+We need $A \subset E$ but not $B \subset E$:
+$$\begin{aligned}
+A &\setminus B \\
+A(x) &\wedge \neg B(x) \\
+[E(x) \wedge A(x)] &\wedge \neg B(x) \\
+A(x) &\wedge [\neg B(x) \wedge E(x)]\\
+A &\cap B^c \\
+\end{aligned}$$
+
+\fbox{$A \subset B \cimp A \setminus B = \emptyset$} \nl
+$\rimp$ :
+$$ \begin{aligned}
+A &\subset B \\
+A \setminus B = A \setminus (A \cup B \setminus A) \\
+\end{aligned} $$
+This is surprisingly difficult to do elegantly. \nl
+
+\fbox{$A \setminus (A \setminus B) = A \cap B$} \nl
+$$\begin{aligned}
+x \in A &\setminus (A \setminus B) \cimp \\
+A(x) &\wedge \neg [A(x) \wedge \neg B(x)] \\
+A(x) &\wedge [\neg A(x) \vee B(x)] \\
+[A(x) \wedge \neg A(x)] &\vee [A(x) \wedge B(x)] \\
+False &\vee [A(x)] \wedge B(x)] \\
+&A(x) \wedge B(x) \\
+\cimp & x \in A \cap B\\
+\end{aligned}$$
+
+\fbox{$A \cap (B \setminus C) = (A \cap B) \setminus (A \cap C)$} \nl
+$$ \begin{aligned}
+x \in (A \cap B) &\setminus (A \cap C) \cimp \\
+[A(x) \wedge B(x)] &\wedge \neg [A(x) \cap C(x)] \\
+[A(x) \wedge B(x)] &\wedge [\neg A(x) \vee \neg C(x)] \\
+[A(x) \wedge B(x) \wedge \neg A(x)] &\vee [A(x) \wedge B(x) \wedge \neg C(x)] \\
+False &\vee [A(x) \wedge B(x) \wedge \neg C(x)] \\
+A(x) &\wedge [B(x) \wedge \neg C(x)] \\
+\cimp x \in A &\cap (B \setminus C)\\
+\end{aligned}$$
+
+\fbox{$A \cap B \subset (A\cap C) \cup (B \cap C^c)$} \nl
+We need $A \cap B \subset E$.
+$$ \begin{aligned}
+A &\cap B =\\
+A &\cap B \cap [C \cup C^c] =\\
+[A \cap B \cap C] &\cup [A \cap B \cap C^c] \\ \\
+[A \cap B \cap C] &\subset A \cap C\\
+[A \cap B \cap C^c] &\subset B \cap C^c\\
+A \cap B = [A \cap B \cap C] \cup [A \cap B \cap C^c] &\subset [A \cap C] \cup [B \cap C^c]\\
+A \cap B &\subset [A \cap C] \cup [B \cap C^c]\\
+\end{aligned}$$
+
+\fbox{$(A \cup C) \cap (B \cup C^c) \subset A \cup B$} \nl
+We don't need any qualifiers on our universal set $E$.
+$$\begin{aligned}
+(A \cup C) &\cap (B \cup C^c) =\\
+[(A \cup C) \cap B] &\cup [(A \cup C) \cap C^c] =\\
+[(A \cup C) \cap B] &\cup [(A \cap C^c) \cup (C \cap C^c)] =\\
+[(A \cup C) \cap B] &\cup (A \cap C^c) \cup \emptyset\\ \\
+[(A \cup C) \cap B] &\subset B\\
+(A \cap C^c) &\subset A\\
+(A \cup C) \cap (B \cup C^c) = [(A \cup C) \cap B] \cup (A \cap C^c) &\subset A \cup B \\
+(A \cup C) \cap (B \cup C^c) &\subset A \cup B\\
+\end{aligned}$$
+
+\fbox{The power set of a fininte set has $2^n$ elements.} \nl
+Inductive proof: Take the empty set. $\mathscr{P}(\emptyset)$ has exactly one element, $\emptyset$ ($\emptyset \subset \emptyset$). $2^0 = 1$. \nl
+Induction hypothesis: A set A with $k$ elements has a power set with $2^k$ elements. \nl
+Now create any set B with $k+1$ elements by adding one element x to one of its subsets with $k$ elements (add the missing element). Now, the power set of B contains each element in the power set of A, but also contains one more element for each element a in $\mathscr{P}(A)$, namely $\crl{x} \cup a$. Thus, any B with k+1 elements has $2*2^k = 2^{k+1}$ elements. By the principle of mathematical induction, all finite sets have $2^n$ elments in their power set. \nl
+
+Intuitive proof: Lay out each element of a given finite set A in a line, and represent each element's ($x \in A$) belonging to some $a \in \mathscr{P}(A)$ by a binary value. Clearly, there are $2^n$ possible distinct binary numbers given n digits. \nl
+
+\fbox{$\bigcup_{X \in \mathscr{C}} X^c = \prn*{\bigcap_{X \in \mathscr{C}} X}^c $} \nl
+Given $a \in \bigcup_{X \in \mathscr{C}} X^c$, $a \not\in X$ for some $X \in \mathscr{C}$. Now, $a \not\in \bigcap_{X \in \mathscr{C}} X$, because there is an $X \in \mathscr{C}$ s.t. $a\not\in X$. Since $a\not\in \bigcap_{X \in \mathscr{C}} X$, $a\in \prn*{\bigcap_{X \in \mathscr{X}} X}^c$. \nl \nl
+Now, given $b \in \prn*{\bigcap_{X \in \mathscr{C}} X}^c$, again $b \not\in X$ for some $X \in \mathscr{C}$, so we get $b \in X^c$, and $b \in \bigcup_{X \in \mathscr{C}} X^c$. \nl
+
+\fbox{$\bigcap_{X \in \mathscr{C}} X^c = \prn*{\bigcup_{X \in \mathscr{C}} X}^c$} \nl
+
+\fbox{$\bigcap_{X \in \mathscr{C}} \mathscr{P}(X) = \mathscr{P}(\bigcap_{X \in \mathscr{C}} X)$} \nl
+For any element $A \in \bigcap_{X \in \mathscr{C}} \mathscr{P}(X)$, there must be some equivalent $A$ in every $\mathscr{P}(X)$ for $A$ to be in the intersection. Since for any $A \in \mathscr{P}(X)$, $A \subset X$, all $x \in A$ are also in X for that term. Now, if $x \in A \kern5px \forall A$, $x \in X \kern5px \forall X$ and $x \in \bigcap_{X \in \mathscr{C}} X$. Now $A \subset \bigcap_{X \in \mathscr{C}} X$, so $A \in \mathscr{P}\prn*{\bigcap_{X \in \mathscr{C}} X}$. \nl \nl
+Now take any element $B \in \mathscr{P}({\bigcap_{X \in \mathscr{C}} X})$. $B \subset \bigcap_{X \in \mathscr{C}} X$, so if $x \in B$, $x \in X \kern5px \forall X \in \mathscr{C}$, and $B \subset X \kern5px \forall X \in \mathscr{C}$. Now, $B \in \mathscr{P}(X) \kern5px \forall X \in \mathscr{C}$, so $B \in \bigcap_{X \in \mathscr{C}} \mathscr{P}(X)$. \nl \nl
+$\bigcap_{X \in \mathscr{C}} \mathscr{P}(X) = \mathscr{P}(\bigcap_{X \in \mathscr{C}} X)$ \nl
+
+\fbox{$\bigcup_{X \in \mathscr{C}} \mathscr{P}(X) \subset \mathscr{P}(\bigcup_{X \in \mathscr{C}} X)$} \nl
+For any element $A \in \bigcup_{X \in \mathscr{C}} \mathscr{P}(X)$, $A \subset X$ for some $X \in \mathscr{C}$. Now, $A \subset X \subset \bigcup_{X \in \mathscr{C}} X$, so $A \in \mathscr{P}(\bigcup_{X \in \mathscr{C}} X$. \nl \nl
+$\bigcup_{X \in \mathscr{C}} \mathscr{P}(X) \subset \mathscr{P}(\bigcup_{X \in \mathscr{C}} X)$. \nl
+
+\fbox{$\bigcap_{X \in \mathscr{P}(E)} X = \emptyset$} \nl
+$\emptyset \subset E$, so $\emptyset \in \mathscr{P}(X)$, and since there are no elements in the empty set, there can be no elements in an intersection with the empty set. Now there are no elments in $\bigcap_{X \in \mathscr{P}(E)} X$, so it is empty, and equal to the empty set. \nl
+
+\fbox{$E \subset F \rimp \mathscr{P}(E) \subset \mathscr{P}(F)$} \nl
+Any subset $A \subset E$ is also a subset of F by transitivity: $A \subset E \subset F$, so any element $A \in \mathscr{P}(E)$ is also in $\mathscr{P}(F)$. \nl
+
+\fbox{$\bigcup \mathscr{P}(E) = E$} \nl
+$E \in \mathscr{P}(E)$, so for any element $x \in E$, $x \in \bigcup \mathscr{P}(E)$. Additionally, every element $A \in \mathscr{P}(X)$ is a subset of X, so all elements $x \in \bigcup \mathscr{P}(X)$ are in $E$. \nl
+
+\fbox{$E \subset \mathscr{P}(\bigcup_{X \in E} X)$} \nl
+Every element in $E$ is being broken down into its elements, unioned, and then we take the power set. If there is an element $X \in E$, then $X \subset \bigcup_{X \in E}X$ (we are here required to recognize that our elements $X$ are themselves sets). Now $X \in \mathscr{P}(\bigcup_{X \in E}X)$. \nl
+
+\centerline{\textbf{Section 6}}
+
+\fbox{$\prn*{A \cup B} \times X = \prn*{A \times X} \cup \prn*{B \times X}$} \nl
+For any ordered pair $(c, x_1) \in \prn*{A \cup B} \times X$, $c \in A$ or $c \in B$. \nl
+\hspace*{50px}$c \in A \kern10px and \kern10px x_1 \in X \implies (c, x_1) \in \prn*{A \times X} \implies (c,x_1) \in \prn*{A \times X} \cup \prn*{B \times X}$ \nl
+\hspace*{50px}$c \in B \kern10px and \kern10px x_1 \in X \implies (c, x_1) \in \prn*{B \times X} \implies (c,x_1) \in \prn*{A \times X} \cup \prn*{B \times X}$ \nl \nl
+Thus, \kern5px $\prn*{A \cup B} \times X \kern5px \subset \kern5px \prn*{A \times X} \cup \prn*{B \times X}$ \nl
+
+Now, take $(d, x_2) \in \prn*{A \times X} \cup \prn*{B \times X}$. $c \in A$ or $c \in B$, thus $c \in \prn*{A \cup B}$. \nl
+Since $x_2 \in X$, we have $(c,x_2) \in \prn*{A \cup B} \times X$, thus \nl
+$\prn*{A \times X} \cup \prn*{B \times X} \kern5px \subset \kern5px \prn*{A \cup B} \times X$ \nl
+$\prn*{A \cup B} \times X = \prn*{A \times X} \cup \prn*{B \times X}$ \nl
+
+\fbox{$\prn*{A \cap B} \times \prn*{X \cap Y} = \prn*{A \times X} \cap \prn*{B \times Y}$} \nl
+All steps are biconditional with the lines above and below:
+$$\begin{aligned}
+(c,z) \in \prn*{A \cap B} &\times \prn*{X \cap Y} \cimp \\
+[A(c) \wedge B(c)] &\wedge [X(z) \wedge Y(z)] \\
+[A(c) \wedge X(z)] &\wedge [B(c) \wedge Y(z)] \\
+[(c,z) \in A \times X] &\wedge [(c,z) \in B \times Y] \\
+\cimp (c,z) \in (A \times X) &\cap (B \times Y)
+\end{aligned}$$
+
+\fbox{$\prn*{A \setminus B} \times X = \prn*{A \times X} \setminus \prn*{B \times X}$} \nl
+All steps biconditional:
+$$\begin{aligned}
+(c, x) \in (A \times X) &\setminus (B \times X) \cimp \\
+[A(c) \wedge X(x)] &\wedge \neg[B(c) \wedge X(x)]\\
+[A(c) \wedge X(x)] &\wedge [\neg B(c) \vee \neg X(x)]\\
+[[A(c) \wedge X(x)] \wedge \neg B(c)] &\vee [[A(c) \wedge X(x)] \wedge \neg X(x)] \\
+[A(c) \wedge X(x) \wedge \neg B(c)] &\vee False \\
+[A(c) \wedge \neg B(c)] \wedge X(x)\\
+\cimp (c,x) \in (A \setminus B) \times X \\
+\end{aligned}$$
+
+\fbox{$\prn*{A = \emptyset} \vee \prn*{B = \emptyset} \Longleftrightarrow A \times B = \emptyset$} \nl
+If there are no elements in a or b, then there can be no cartesian products containing elements from both sets, so $A \times B = \emptyset$. \nl
+If there are no elements in $A \times B$, then
+$$\neg[A(x) \wedge B(y)]\kern20px \forall x, y$$
+$$\neg A(x) \vee \neg B(y)\kern20px \forall x,y$$
+$$\neg A(x) \forall x \kern10px\wedge \kern10px \neg B(x) \forall y$$
+Which is equivalent to one of those sets being empty. \nl
+
+\fbox{$\prn*{A \subset X} \wedge \prn*{B \subset Y} \wedge \prn*{A \times B \neq \emptyset} \cimp (A \times B \subset X \times Y) \wedge (A \times B \neq \emptyset)$} \nl
+The nonempty caviat is provided on both sides, but $\rimp$ would still work if it were on neither side. \nl
+$\rimp$ :
+$$\begin{aligned}
+(A \subset X) \wedge (B \subset Y) \rimp \\
+[A(a) \rimp[0] X(a)] \wedge [B(b) \rimp[0] Y(b)] \\
+[A(a) \wedge B(b)] \rimp[5] [X(a) \wedge Y(b)] \\
+\rimp A \times B \subset X \times Y \\
+\end{aligned}$$
+$\limp$ :
+If for all $(a,b) \in A \times B$, $(a,b) \in X \times Y$, and there exists some $(a,b) \in A \times B$, then we can take 
+
+\centerline{\textbf{Section 7}}
+
+\hspace*{1cm} \nl
+\fbox{A nonreflexive, symmetric and transitive operation} \nl
+The empty relation/the empty set; no element is in a pair with itself (there are no singletons), and for any relation $aRb$, $bRa$ (vacuously). Lastly, for any $aRb$ and $bRc$, $aRc$, vacuously. \nl
+
+\fbox{A reflexive, nonsymmetric and transitive operation} \nl
+$\leq$ satisfies these properties on the integers; $\forall a \in \mathbb{Z}$, $a\leq a$. $0 \leq 1$, but $1 \not\leq 0$,\nl
+ and $\forall a, b, c \in \mathbb{Z}$, $\prn*{a \leq b} \wedge \prn*{b \leq c} \implies a \leq c$. \nl
+
+ \fbox{A reflexive, symmetric and nontransitive operation} \nl
+For $a, b \in \mathbb{Z}$, define $R$ as $a R b$ if $\abs*{a-b} \leq 1$. $a-a = 0 \leq 1$ gives reflexivity, $\abs{a-b} = \abs{b-a}$ gives symmetry, but we can take $0 R 1$ and $1 R 2$: while both of these are valid, $\abs{0-2} = 2 \not\leq 1$. \nl
+
+\fbox{Where $R$ is an equivalence relation, $X/R$ is a set} \nl
+$X/R = \crl*{A \in \mathscr{P}(X) \; \vert \; \forall \, a,b \in A, a R b}$ \nl
+
+\centerline{\textbf{Section 8}} 
+
+\fbox{$Y^\emptyset$ has exactly one element} \nl
+There is only one function assigning each element of $\emptyset$ to a value in any set $Y$; any function from $\emptyset$ to any other set will have no elements ($\emptyset \times Y = \emptyset$), and the function defined by the null set is a function $\emptyset \longrightarrow Y$. \nl
+
+\fbox{$X \neq \emptyset \implies \emptyset^X = \emptyset$} \nl
+For any function $X \rightarrow \emptyset$, every element of $X$ must have some associated element in $\emptyset$. Since there are no elements in $\emptyset$, there can be no functions $X \rightarrow \emptyset$ if there any elements in $X$, thus the set $\emptyset^X$ is empty. \nl
+
+\centerline{\textbf{Section 9}}
+
+\fbox{$\bigcup_{k} A_k = \bigcup_{j} \prn*{\bigcup_{i} A_i}$ where $K = \bigcup_j I_j$} \nl
+For any element $x \in \bigcup_{k} A_k$, there is some index $k_x \in K$ such that $x \in A_{k_x}$. For this index $k_x$, there is some $j$ such that $i_x \in I_j$ where $i_x = k_x$, and thus there is some $A_{k_x} = A_{i_x}$, and this $A_{i_x}$ will be included in the union $\bigcup_{j} \prn*{\bigcup_{i} A_i}$. Thus, $x \in \bigcup_{j} \prn*{\bigcup_{i} A_i}$. \nl
+
+For any element $y \in \bigcup_{j} \prn*{\bigcup_{i \in I_j} A_i}$, for some $i_y$ and $j_y$, $y \in A_{i_y}$ where $i_y \in j_y \in J$. Since $K = \bigcup_j I_j$, for some $k_y \in K, $ we have $k_y = i_y$. Now $y \in A_{k_y} \subset \bigcup_{k} A_k$, so $y \in \bigcup_{k} A_k$. \nl \nl
+$\bigcup_{k} A_k = \bigcup_{j} \prn*{\bigcup_{i} A_i}$. \nl
+
+\fbox{$\bigcup_i\prn{\bigcup_j A_j} = \bigcup_k \prn{\bigcup_l A_l}$ where $\bigcup_i J_i = \bigcup_k L_k$.} \nl
+
+
+\fbox{$B \cap \bigcup_i A_i = \bigcup_i (B \cap A_i)$} \nl
+If $a \in B \cap \bigcup_i A_i$, then $a \in B$ and $a \in A_i$ for some i. Now $a \in B \cap A_i$ for some i, and $a \in \bigcup_i (B \cap A_i)$. \nl \nl
+If $a \in \bigcup_i (B \cap A_i)$, then $a \in B$ and $a \in A_i$ for some i. Now $a \in B$ and $a \in \bigcup_i A_i$, so $a \in B \cap \bigcup_i A_i$. \nl \nl
+$B \cap \bigcup_i A_i = \bigcup_i (B \cap A_i)$. \nl
+
+\fbox{$B \cup \bigcap_i A_i = \bigcap_i (B \cup A_i)$} \nl
+If $a \in B \cup \bigcap_i A_i$, then $a \in B$ or $a \in A_i \; \forall \, i$. If $a \in B$, then $a \in B \cup A_i$ for all i, so $a \in \bigcap_i (B \cup A_i)$. If $a \in A_i \; \forall \, i$, then again $a \in B \cup A_i$ for all i, and $a \in \bigcap_i (B \cup A_i)$. \nl \nl
+Now consider $a \in \bigcap_i (B \cup A_i)$. If $a \in B$, then $a \in \bigcap_i (B \cup A_i)$. If $a \not\in B$, then $a \in \bigcap_i A_i \; \forall \, i$, and $a \in B \cup \bigcap_i A_i$. \nl \nl
+$B \cup \bigcap_i A_i = \bigcap_i (B \cup A_i)$. \nl
+
+\fbox{$(\bigcup_i A_i) \cap (\bigcup_j B_j) = \bigcup_{i,j} (A_i \cup B_j)$} \nl
+If $a \in (\bigcup_i A_i) \cap (\bigcup_j B_j)$, then $a \in A_{i_x}$ for some $i_x$, and $a \in B_{j_x}$ for some $j_x$. $a \in A_{i_x} \cap B_{j_x}$. $(i_x, j_x) \in I \times J$, and now we have $a \in (A_{i_x} \cap B_{j_x}) \subset \bigcup_{i,j} (A_i \cap B_j)$, so $a \in \bigcup_{i,j} (A_i \cap B_j)$. \nl \nl
+If $a \in \bigcup_{i,j} (A_i, \cap B_j)$, then again we have $a \in A_{i_x}$ for some $i_x$, and $a \in B_j$ for some $j_x$. Now, $a \in A_{i_x} \subset \bigcup A_i$, so $a \in \bigcup_i A_i$, and the same logic gives $a \in \bigcup_j B_j$. Since a is in both unions, $a \in (\bigcup_i A_i) \cap (\bigcup_j B_j)$. \nl \nl
+$(\bigcup_i A_i) \cap (\bigcup_j B_j) = \bigcup_{i,j} (A_i \cup B_j)$. \nl
+
+\fbox{$(\bigcap_i A_i) \cup (\bigcap_j B_j) = \bigcap_{i,j} (A_i \cup B_j)$} \nl
+$(I$ and $J$ are presumed nonempty). \nl
+If $a \in (\bigcap_i A_i) \cup (\bigcap_j B_j)$, $a \in \bigcap_i A_i$ or $a \in \bigcap_j B_j$. If $a \in A_i \; \forall \, i$, then $a \in A_i \cup B_j \; \forall \, (i,j)$. Now $a \in \bigcap_{i,j} (A_i \cup B_j)$. The same logic applies if $a \in \bigcap_j B_j$, so $a \in \bigcap_{i,j} (A_i \cup B_j)$. \nl \nl
+If $a \not\in (\bigcap_i A_i) \cup (\bigcap_j B_j)$, then $\exists \, i_x, j_x$ s.t. $a \not\in A_{i_x}, \; a \not\in B_{j_x}$, and now $a \not\in A_{i_x} \cup B_{j_x}$. $(i_x, j_x) \in I \times J$, so $a \not\in \bigcup_{i,j} (A_i \cup B_j)$. We now take a contrapositive:
+$$a \not\in \prn*{\bigcap_i A_i} \cup \prn*{\bigcap_j B_j} \implies a\not\in \bigcap_{i,j} (A_i \cup B_j)$$
+$$a \in \bigcap_{i,j} (A_i \cup B_j) \rimp a \in \prn*{\bigcap_i A_i} \cup \prn*{\bigcap_j B_j}$$
+$(\bigcap_i A_i) \cup (\bigcap_j B_j) = \bigcap_{i,j} (A_i \cup B_j)$. \nl
+
+\fbox{$(\bigcup_i A_i) \times (\bigcup_j B_j) = \bigcup_{i,j} (A_i \times B_j)$} \nl
+For $(a,b) \in (\bigcup_i A_i) \times (\bigcup_i B_i)$, $\exists \, i_x$ and $j_x$ s.t. $a \in A_{i_x}$ and $b \in B_{j_x}$. Now, $(a,b) \in (A_{i_x} \times B_{j_x}) \subset \bigcup_{i,j} (A_i \times B_j)$, so \kern10px $(a,b) \in \bigcup_{i,j} (A_i \times B_j)$. \nl \nl
+For $(c,d) \in \bigcup_{i,j} (A_i \times B_j)$, $\exists \, i_x$ and $j_x$ s.t. $c \in A_{i_x}$ and $d \in B_{j_x}$. Now, $c \in \bigcup_i A_i, d \in \bigcup_j B_j$, so $(c,d) \in (\bigcup_i A_i) \times (\bigcup_j B_j).$ \nl \nl
+$(\bigcup_i A_i) \times (\bigcup_j B_j) = \bigcup_{i,j} (A_i \times B_j).$ \nl
+
+\fbox{$(\bigcap_i A_i) \times (\bigcap_j B_j) = \bigcap_{i,j} (A_i \times B_j)$} \nl
+$(I$ and $J$ are presumed nonempty). \nl
+If $(a,b) \in (\bigcap_i A_i) \times (\bigcap_j B_j)$, $a \in A_i \kern5px \forall i \in I$, and $b \in B_i \kern5px \forall j \in J$. Now $(a,b) \in A_i \times B_j \kern5px \forall (i,j) \in I \times J$, and $a \in \bigcap_{i,j} (A_i \times B_j)$. \nl \nl
+If $(c,d) \in \bigcap_{i,j} (A_i \times B_j)$, then $(c,d) \in A_i \times B_j \kern5px \forall i \in I, \forall j \in J$. Now $c \in A_i \kern5px \forall i \in I$, so $x \in \bigcap_i A_i$. Also, $d \in B_j \kern5px\forall j \in J$, so $d \in \bigcap_j B_j$. Now $(c,d) \in (\bigcap_i A_i) \times (\bigcap_j B_j)$. \nl \nl
+$(\bigcap_i A_i) \times (\bigcap_j B_j) = \bigcap_{i,j} (A_i \times B_j)$. \nl
+
+\fbox{$\bigcap_i X_i \subset X_j \subset \bigcup_i X_i$} \nl
+$(I$ is assumed to be nonempty). \nl
+If $a \in \bigcap_i X_i$, $\forall j \in I, a \in X_j$. Thus, $\bigcap_i X_i \subset X_j$. \nl
+If there exists a set A such that $\forall a \in A, a \in \bigcap_i X_i$ $\forall i \in I$, then $a \in \bigcap_i X_i$ by definition; we defined intersections to include all such elements. \nl \nl
+If $a \in X_j$, then $a \in X_i$ for some $i \in I$ (this i being j), and $a \in \bigcup_i X_i$. \nl
+If there exists a set B such that whenever $y \in X_i$ for some $i \in I$, then $y \in B$, then all $x \in \bigcup_i X_i$ are in $B$, as B definitionally includes any element that satisfies the criteria of $\bigcup_i X_i$. \nl
+
+
+\centerline{\textbf{Section 10}}
+
+\fbox{$f\brc*{\bigcup_i A_i} = \bigcup_i f\brc*{A_i}$} \nl
+$f\brc*{\bigcup_i A_i} \subset \bigcup_i f\brc*{A_i}$: \nl
+For any $y \in f\brc*{\bigcup_i A_i}$, $y = f(x)$ for some $x \in \bigcup_i A_i$, and $x \in A_{i_x}$ for some $i_x \in I$. Now $ y \in f\brc*{A_{i_x}}$, and $y \in \bigcup_i f \brc*{A_i}$. \nl \nl
+$\bigcup_i f\brc*{A_i} \subset f\brc*{\bigcup_i A_i}$: \nl
+For any $y \in \bigcup_i f\brc*{A_i}$, $y = f(x)$ for some $x \in A_{i_x}$ where $i_x \in I$. Since $A_{i_x} \subset \bigcup_i A_i$, $x \in \bigcup_i A_i$, and $y = f(x) \in f\brc*{\bigcup_i A_i}.$ \nl
+We now have $f\brc*{\bigcup_i A_i} = \bigcup_i f\brc*{A_i}$. \nl
+
+\fbox{$f\brc*{\bigcap_i A_i} \neq \bigcap_i f\brc*{A_i}$} \nl
+$f: 2 \rightarrow 2$, set $f(0) = 0, f(1) = 0$, and $I = 2$ with $A_0 = \crl{0}, A_1 = \crl{1}$. \nl
+$\bigcap_i f\brc*{A_i} = \bigcap  \crl{\crl{0}, \crl{0}} = \crl{0} \neq \emptyset = f\brc*{\emptyset} = f\brc*{\bigcap_i A_i}$. \nl
+
+\fbox{$f\brc*{A \setminus B} \neq f\brc*{A} \setminus f\brc*{B}$} \nl
+$f: 2 \rightarrow 2$, set $f(0) = 0, f(1) = 0, A = \crl{0}, B = \crl{1}$: \nl
+$f\brc*{A} \setminus f\brc*{B} = \crl{0} \setminus \crl{0} = \emptyset \neq \crl{0} = f\brc*{\crl{0} \setminus \crl{1}}$ \nl
+
+\fbox{$f: X \twoheadrightarrow Y \kern10px \Longleftrightarrow \kern10px\forall \, \bar{Y} \in \mathscr{P}(Y)$ where $\bar{Y} \neq \emptyset, \kern5px f^{-1}\brc*{\bar{Y}} \neq \emptyset$} \nl
+If any element $y \in Y$ has some $x \in X$ s.t. $f(x) = y$, then any nonempty $\bar{Y}$ has that same $y$ and hence some $x \in f^{-1}\brc*{\bar{Y}}$. Since $f^{-1}\brc*{\bar{Y}}$ contains some x, it is not the empty set. \nl \nl
+Conversely, if any nonempty $\bar{Y}$ has some $x \in f^{-1}\brc*{\bar{Y}}$, any y is in some singleton $\bar{Y} = \crl{y}$. We can take $\bar{X} = f^{-1}\brc*{\crl{y}}$, and then select some element $x \in \bar{X}$ s.t. $f(x) = y$. Thus, every y has some x that maps to it. \nl
+
+\fbox{$f: X \hookrightarrow Y \kern10px \Longleftrightarrow \kern10px \forall \, \crl{y} \in \mathscr{P}(Y), \kern3px f^{-1}\brc*{\crl{y}} = \crl*{x}$} \nl
+If every $f(a) = f(b) \implies a = b$, all elements $x$ s.t. $f(x) = y$ are the same, and the set $f^{-1}\brc*{\crl{y}}$ is a singleton if it has any elements. Halmos is using ``range'' to mean image here, and the implication doesn't work this way if we interpret range to mean codomain, as we would be asserting that all monic functions are bijective. \nl \nl
+If there is only one element in $f^{-1}\brc*{\crl{y}}$, then there is only one element s.t. f(x) = y, and hence $f(a) = f(b) \implies a = b$ for any given y in the image of $X$. \nl
+
+\fbox{Function composition is associative} \nl
+brb shooting myself
+
+\fbox{Relation composition is associative} \nl
+
+\fbox{Where R and S are relations, $(SR)^{-1} = R^{-1}S^{-1}$} \nl
+If $a \, (SR)^{-1} \, b$, then $b \, SR \, a$, so $b \, S \, x,$ and $ x \, R \, a$ for some x. Now, $a \, S^{-1} \, x$ and $x \, R^{-1} \, b$. Now $b \, R^{-1}S^{-1} \, a$. Thus, $(SR)^{-1} \subset R^{-1}S^{-1}$. \nl
+Now, if $a \, (R^{-1}S^{-1}) \, b$, then $a \, R^{-1} \, x$, and $x \, S^{-1} \, b$ for some x. Now, $b \, S \, x$ and $x \, R \, a$, so $b \, SR \, a$, and now $a \, (SR)^{-1}\, b$. Thus, $R^{-1}S^{-1} \subset (SR)^{-1}$, and we have $(SR)^{-1} = R^{-1}S^{-1}$. \nl
+
+\fbox{Chapter-end exercise (i)} \nl
+$f: X \rightarrow Y, \kern5px g: Y \rightarrow X$, \kern10px $\forall \, x \in X, \; gf(x) = x$. \nl
+If $f(\bar{x}) = f(\hat{x})$,
+$$gf(\bar{x}) = gf(\hat{x})$$
+$$\bar{x} = gf(\bar{x}) = gf(\hat{x}) = \hat{x}$$
+$$\bar{x} = \hat{x}$$
+and f is injective. \nl \nl
+Now, since $gf(x) = x$, we can simply take $y = f(x)$ to get some value y s.t. $g(y) = x$ for any $x \in X$, thus g is surjective. \nl
+
+\fbox{$f(A \cap B ) = f(A) \cap f(B) \cimp$ f is injective} \nl
+$\implies$ : \nl
+For any $a, b \in X$, take the singleton subsets $\crl{a}, \crl{b}$. If $f(a) = f(b)$, then 
+$$f(\crl{a} \cap \crl{b}) = f(\crl{a}) \cap f(\crl{b}) = \crl{f(a)}$$
+Since $\crl{f(a)}$ is nonempty, $f(\crl{a} \cap \crl{b})$ is nonempty, and $\crl{a} \cap \crl{b}$ is also nonempty. Since these are two singletons, $a = b$. f is injective.\nl
+$\Longleftarrow$ : \nl
+If f is injective, take any $y \in f(A) \cap f(B)$. We have $y \in f(A), \; y \in f(B)$. Now, if $\hat{x} \in A, \bar{x} \in B$,  
+$$f(\hat{x}) = y = f(\bar{x})$$
+$$\hat{x} = \bar{x}$$
+Since $\bar{x} \in A, \bar{x} \in B$, we have $\bar{x} \in A \cap B$ and $y \in f(A \cap B)$. FLAG: prove other subset relation \nl
+
+\fbox{$f(X \setminus A) \subset Y \setminus f(A) \cimp$ f is injective} \nl
+$\implies$ : \nl
+Take any singleton $\crl{b} \subset X$, and now
+$$f(X \setminus (X\setminus \crl{b})) \subset Y \setminus f(X \setminus \crl{b})$$
+$$f(\crl{b}) \subset Y \setminus f(X \setminus \crl{b})$$
+Now if $f(b) = f(a), \; a \not\in X \setminus\crl{b} \implies a \in \crl{b} \implies a = b$. f is injective. \nl
+$\Longleftarrow$ : \nl
+If $z \not\in Y \setminus f(A)$, $z \in f(A)$ or $z \not\in Y$. If $z \not\in Y, \; z \not\in f(X \setminus A)$. Since f is injective, $(z \in f(A) \wedge f(b) = z) \implies b \in A \implies b \not\in X \setminus A $
+
+\fbox{$f(X \setminus A) \supset Y \setminus f(A) \cimp f$ is surjective} \nl
+
+well whatever
+
+
+
+
+
+
+\end{flushleft}
+\end{document}
